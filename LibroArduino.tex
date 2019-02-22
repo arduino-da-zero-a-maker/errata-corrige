@@ -1,0 +1,169 @@
+% Proudly written in LaTeX by Giulio & Stefano
+\title{Arduino da zero a maker}
+\author{Giulio e Stefano}
+\date{2016}
+
+% Parametri di impaginazione: margini, formato pagina, dimensione e tipo di font
+\documentclass[twoside, 12pt]{book}
+\usepackage[left=2cm,right=2cm,top=2.5cm,bottom=2.5cm]{geometry}
+\geometry{papersize={17cm,24cm},centering,dvips=false}
+
+% Pacchetto per pagine intenzionalmente bianche
+\usepackage{emptypage}
+
+% Pacchetti per il font encoding e la lingua del testo
+\usepackage[latin1]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[italian]{babel}
+
+% Fonts: testo, formule matematiche e simboli generici
+\usepackage{helvet}
+\usepackage{courier}
+\usepackage[light,math]{iwona}
+\usepackage{pifont}
+\usepackage{amssymb,amsfonts,textcomp}
+
+\usepackage{amsmath}
+\usepackage[makeroom]{cancel}
+
+\usepackage{nicefrac}
+
+% Personalizzazioni dei parametri LaTeX (formato titoli...)
+\usepackage[font={small,it}]{caption}
+  %~ Titoli dei capitoli più in sù
+  \makeatletter
+  % "\@makechapterhead" applies to ordinary or numbered chapters
+  \patchcmd{\@makechapterhead}{\vspace*{50\p@}}{}{}{}
+  \patchcmd{\@makechapterhead}{\vskip 40\p@}{\vskip 20\p@}{}{}
+  % "\@makeschapterhead" applies to "starred" or un-numbered chapters
+  \patchcmd{\@makeschapterhead}{\vspace*{50\p@}}{}{}{}
+  \patchcmd{\@makeschapterhead}{\vskip 40\p@}{\vskip 20\p@}{}{}
+  \makeatother
+% personalizzazione intestazioni e pié di pagina
+\usepackage{fancyhdr}
+  \pagestyle{fancy}
+  \renewcommand{\chaptermark}[1]{\markboth{#1}{}}
+  
+  \makeatletter
+  \fancyhf{}
+    
+  %%% INTESTAZIONE %%%
+  % Left Even, Right Odd: Titolo del libro
+  \fancyhead[LE]{\itshape\nouppercase{\@title}}
+  % Right Even, Left Odd: Capitolo attuale
+  \fancyhead[RO]{\itshape\nouppercase{\leftmark}}
+  %%% PIE DI PAGINA %%%
+  % Center: numero di pagina
+  \fancyfoot[C]{\thepage}
+  
+  \renewcommand{\headrulewidth}{0pt}
+  \newcommand\footnoteref[1]{\protected@xdef\@thefnmark{\ref{#1}}\@footnotemark}
+  
+  
+  %~ numeri romani maiuscoli
+  \renewcommand\frontmatter{% 
+    \cleardoublepage 
+    \@mainmatterfalse 
+    \pagenumbering{Roman}
+  }
+  \makeatother
+% URL e relativa personalizzazione
+\usepackage{hyperref}
+\hypersetup{pdftex, hidelinks=true,linkcolor=blue, citecolor=blue, filecolor=blue, urlcolor=blue, pdftitle=}
+
+% Table Of Content: mostra solo capitoli e sottocapitoli
+\setcounter{tocdepth}{2}
+
+% Pacchetto relativo all'impaginazione a colonne
+\usepackage{multicol}
+
+%%% Colori, grafica, figure e tabelle %%%
+\usepackage[usenames,dvipsnames]{xcolor}
+\definecolor{light-gray}{gray}{0.95}
+
+\usepackage[pdftex]{graphicx}
+\usepackage{caption}
+\captionsetup{justification=centering}
+
+% Listati e codice
+\usepackage{listings}
+
+  % Linguaggio Arduino
+  \lstdefinestyle{Carduino}{
+      basicstyle=\footnotesize\ttfamily,
+      language=C,
+      numbers=left,
+      numbersep=5pt,
+      numberstyle=\tiny,
+      stepnumber=5,
+      firstnumber=1,
+      numberfirstline=true,
+      keywords={void, boolean, unsigned, byte, int, long, short, float, const, String, HIGH, LOW, INPUT, OUTPUT, INPUT_PULLUP},
+      %~ keywordstyle=\color[rgb]{.08,.63,.64},
+      keywordstyle=\bfseries,
+      keywords=[2]{setup, loop, char, word, double, if, else, for, switch, case, while, do, while, break, continue, return},
+      %~ keywordstyle=[2]{\color[rgb]{.37,.43,.01}},
+      keywordstyle=[2]{\bfseries},
+      keywords=[3]{pinMode, digitalWrite, digitalRead, analogReference, analogRead, analogWrite, tone, noTone, shiftOut, shiftIn, pulseIn, millis, micros, delay, delayMicroseconds, min, max, abs, constrain, map, pow, sqrt, sin, cos, tan, randomSeed, random, lowByte, highByte, bitRead, bitWrite, bitSet, bitClear, bit, attachInterrupt, detachInterrupt, interrupts, noInterrupts},
+      %~ keywordstyle=[3]{\color[rgb]{.83,.34,.02}},
+      keywordstyle=[3]{\bfseries},
+      commentstyle=\color[rgb]{.35,.41,.43},
+      stringstyle=\color{blue}
+  }
+
+  \lstdefinestyle{bash} {
+    language=bash,
+  }
+  
+  \lstdefinestyle{nonumbers} {
+    numbers=none,
+  }
+  
+  \lstdefinestyle{small} {
+    basicstyle=\scriptsize\ttfamily,
+  }
+  
+  \lstdefinestyle{CarduinoInline} {
+    language=C,
+    basicstyle=\footnotesize\ttfamily,
+  }
+
+  % wrapping
+  \lstdefinestyle{wrap} {
+      %~ breaklines=true,
+      postbreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\color{red}\hookrightarrow\space}}
+  }
+
+  % impostazioni di default
+  \lstset {
+    %~ frame=single,
+    breaklines=true,
+    basicstyle=\footnotesize\ttfamily,
+    mathescape,
+  }
+
+
+\begin{document}
+{\LARGE \textbf{ERRATA CORRIGE} }\\
+
+A \textbf{pagina 42} le due formule per calcolare la resistenza del sensore $R_{sens}$ sono errate e devono essere corrette come segue:
+\begin{multicols}{2}
+\centering
+In termini di tensioni:
+$$ V_{part} = 5V \cdot \frac {R}{R+R_{sens}} $$
+\textcolor{red}{$$ \cancel{R_{sens} = \frac {R}{\frac{5V}{V_{part}}-1}} $$}
+$$ R_{sens} = R \cdot \bigg( \frac{5V}{V_{part}}-1 \bigg) $$
+
+Utilizzando le letture di Arduino:
+$$ lettura = 1024 \cdot \frac {R}{R+R_{sens}} $$
+\textcolor{red}{$$ \cancel{R_{sens} = \frac {R}{\frac{1024}{lettura}-1}} $$}
+$$ R_{sens} = R \cdot \bigg( \frac{1024}{lettura}-1 \bigg) $$
+
+\end{multicols}
+
+Di conseguenza, i codici che implementano queste formule devono essere corretti inserendo una moltiplicazione al posto di una divisione. In particolare, a \textbf{Pagina 43} Linea 15 e \textbf{Pagina 46} Linea 19:
+\begin{lstlisting}[style=Carduino,style=wrap]
+  float resistenzaSensore = RESISTENZAFISSA * ( 1024.0 / valoreSensore - 1 );
+\end{lstlisting}
+
+\end{document}
