@@ -6,7 +6,6 @@
 % Parametri di impaginazione: margini, formato pagina, dimensione e tipo di font
 \documentclass[twoside, 12pt]{article}
 \usepackage[left=2cm,right=2cm,top=2.5cm,bottom=2.5cm]{geometry}
-\geometry{papersize={17cm,24cm},centering,dvips=false}
 
 % Pacchetto per pagine intenzionalmente bianche
 \usepackage{emptypage}
@@ -110,7 +109,11 @@
 \begin{document}
 \maketitle
 
-A \textbf{pagina 42} le due formule per calcolare la resistenza del sensore $R_{sens}$ sono errate e devono essere corrette come segue:
+\section*{Fino a quarta ristampa}
+
+\begin{description}
+\item [pagina V] \textit{``fare del tinkering"}, nella citazione ripresa dal libro di Banzi. Errore di battitura;
+\item [pagina 42] le due formule per calcolare la resistenza del sensore $R_{sens}$ sono errate e devono essere corrette come segue:
 \begin{multicols}{2}
 \centering
 In termini di tensioni:
@@ -122,12 +125,33 @@ Utilizzando le letture di Arduino:
 $$ lettura = 1024 \cdot \frac {R}{R+R_{sens}} $$
 \textcolor{red}{$$ \cancel{R_{sens} = \frac {R}{\frac{1024}{lettura}-1}} $$}
 $$ R_{sens} = R \cdot \bigg( \frac{1024}{lettura}-1 \bigg) $$
-
 \end{multicols}
 
 Di conseguenza, i codici che implementano queste formule devono essere corretti inserendo una moltiplicazione al posto di una divisione. In particolare, a \textbf{Pagina 43} Linea 15 e \textbf{Pagina 46} Linea 19:
 \begin{lstlisting}[style=Carduino,style=wrap]
-  float resistenzaSensore = RESISTENZAFISSA * ( 1024.0 / valoreSensore - 1 );
+float resistenzaSensore = RESISTENZAFISSA * ( 1024.0 / valoreSensore - 1 );
 \end{lstlisting}
+
+\end{description}
+
+\section*{Fino a seconda ristampa}
+\begin{description}
+\item[Pagina 18] ``6 pin, \textit{due} per ogni colore";
+
+\item[Pagina 37] è presente una parentesi tonda in più alla linea 11:
+\begin{lstlisting}[style=Carduino,style=wrap]
+float tensione = lettura * 5.0 / 1024.0;
+\end{lstlisting}
+
+\item [Pagina 38] precisazione: si usa \textbf{float} non solo perché la tensione è più piccola di 1V ma perché in generale è decimale;
+
+\item[Pagina 47] c'è un cambio di segno alla riga 33, come evidenziato nel commento corretto:
+\begin{lstlisting}[style=Carduino,style=wrap]
+temperatura = 1/temperatura - 273.15;
+\end{lstlisting}
+
+\item[Pagina 53] precisazione: \textbf{``la durata di un singolo impulso è detto periodo"}. Il periodo è la somma dei tratti in cui la tensione è \texttt{HIGH} ed in cui è \texttt{LOW};
+
+\end{description}
 
 \end{document}
