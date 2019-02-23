@@ -112,8 +112,8 @@
 \section*{Fino a quarta ristampa}
 
 \begin{description}
-\item [pagina V] \textit{``fare del tinkering"}, nella citazione ripresa dal libro di Banzi. Errore di battitura;
-\item [pagina 42] le due formule per calcolare la resistenza del sensore $R_{sens}$ sono errate e devono essere corrette come segue:
+\item [Pagina V] \textit{``fare del tinkering"}, nella citazione ripresa dal libro di Banzi. Errore di battitura;
+\item [Pagina 42] le due formule per calcolare la resistenza del sensore $R_{sens}$ sono errate e devono essere corrette come segue:
 \begin{multicols}{2}
 \centering
 In termini di tensioni:
@@ -132,6 +132,14 @@ Di conseguenza, i codici che implementano queste formule devono essere corretti 
 float resistenzaSensore = RESISTENZAFISSA * ( 1024.0 / valoreSensore - 1 );
 \end{lstlisting}
 
+\item[Pagina 46] Refuso nel codice: l'identificatore del pin A0 è \texttt{PIN\_TERMORESISTENZA} (e non\\
+\texttt{PIN\_FOTORESISTENZA} come nel listato precedente).
+\begin{lstlisting}[style=Carduino,style=wrap,firstnumber=7]
+pinMode(PIN_TERMORESISTENZA, INPUT);
+\end{lstlisting}
+\begin{lstlisting}[style=Carduino,style=wrap,firstnumber=14]
+int valoreSensore = analogRead(PIN_TERMORESISTENZA);
+\end{lstlisting}
 \end{description}
 
 \section*{Fino a seconda ristampa}
@@ -139,14 +147,14 @@ float resistenzaSensore = RESISTENZAFISSA * ( 1024.0 / valoreSensore - 1 );
 \item[Pagina 18] ``6 pin, \textit{due} per ogni colore";
 
 \item[Pagina 37] è presente una parentesi tonda in più alla linea 11:
-\begin{lstlisting}[style=Carduino,style=wrap]
+\begin{lstlisting}[style=Carduino,style=wrap,firstnumber=11]
 float tensione = lettura * 5.0 / 1024.0;
 \end{lstlisting}
 
 \item [Pagina 38] precisazione: si usa \textbf{float} non solo perché la tensione è più piccola di 1V ma perché in generale è decimale;
 
 \item[Pagina 47] c'è un cambio di segno alla riga 33, come evidenziato nel commento corretto:
-\begin{lstlisting}[style=Carduino,style=wrap]
+\begin{lstlisting}[style=Carduino,style=wrap,firstnumber=33]
 temperatura = 1/temperatura - 273.15;
 \end{lstlisting}
 
