@@ -141,6 +141,8 @@ pinMode(PIN_TERMORESISTENZA, INPUT);
 int valoreSensore = analogRead(PIN_TERMORESISTENZA);
 \end{lstlisting}
 
+\item[Pagina 74] in figura 4.14 le etichette B2 e COM del simbolo dello stepper sono scambiate;
+
 \item[Pagina 76] i pin del motore stepper sono 9, 10, 11, 12, di conseguenza la riga 5 va cambiata con
 \begin{lstlisting}[style=Carduino,style=wrap,firstnumber=5]
  UnipolarStepper stepper(STEPS, 9, 10, 11, 12);
