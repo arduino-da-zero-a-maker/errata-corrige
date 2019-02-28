@@ -47,6 +47,8 @@
 % Listati e codice
 \usepackage{listings}
 
+\usepackage{circuitikz}
+
 % Linguaggio Arduino
 \lstdefinestyle{Carduino}{
     basicstyle=\footnotesize\ttfamily,
@@ -113,6 +115,19 @@
 
 \begin{description}
 \item [Pagina V] \textit{``fare del tinkering"}, nella citazione ripresa dal libro di Banzi. Errore di battitura;
+
+\item [Pagina 5] il circuito di \textit{figura 1.5} ha una svista sulla polarità della batteria, qui di seguito la versione corretta
+\begin{center}
+\begin{circuitikz}
+  \draw (0,0)[american voltages]
+  to[battery1=$V$,invert] (0,2)
+  to[short, i>=$I$] (2,2)
+  to[R=$R$] (2,0)
+  to[short] (0,0);
+\end{circuitikz}
+\end{center}
+
+
 \item [Pagina 42] le due formule per calcolare la resistenza del sensore $R_{sens}$ sono errate e devono essere corrette come segue:
 \begin{multicols}{2}
 \centering
